@@ -14,9 +14,7 @@ app.use(express.static('public'));
 
 
 // GET Route for index.hthml homepage
-app.get('/', (req, res) =>
-    res.sendFile(path.join(__dirname, '/public/index.html'))
-);
+
 // GET Route for notes html
 app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
@@ -58,6 +56,10 @@ app.delete('/api/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/db.json'))
 );
 
+// Homepage ... * that auto routes users from trying to enter site via URL
+app.get('*', (req, res) =>
+    res.sendFile(path.join(__dirname, '/public/index.html'))
+);
 app.listen(PORT, () =>
     console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
