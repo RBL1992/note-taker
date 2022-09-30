@@ -38,18 +38,10 @@ app.post('/api/notes', (req, res) => {
             note_id: uuid(),
         };
 
-        fsUtils.readAndAppend(newNote,'db.json')
-        
-        const response = {
-            status: 'success',
-            body: newNote,
-        };
-
-        console.log(response);
-        res.status(201).json(response);
-    } else {
-        res.status(500).json('Error in posting new note');
+        fsUtils.readAndAppend(newNote, 'db.json')
+        res.json(newNote);
     }
+
 });
 
 app.delete('/api/notes', (req, res) =>
