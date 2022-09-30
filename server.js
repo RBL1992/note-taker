@@ -11,19 +11,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// GET Route for notes
+
+// GET Route for index.hthml homepage
+app.get('/', (req, res) =>
+    res.sendFile(path.join(__dirname, '/public/index.html'))
+);
+// GET Route for notes html
 app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
-// GET Route for homepage
-app.get('*', (req, res) =>
-    res.sendFile(path.join(__dirname, '/public/index.html'))
-);
 
-// GET Route for feedback page
+// GET Route for db.json
 app.get('/api/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/db.json'))
 );
+// Post Route for 
 app.post('/api/notes', (req, res) => {
     // Log that a POST request was received
     console.info(`${req.method} request received to add a new note`);
