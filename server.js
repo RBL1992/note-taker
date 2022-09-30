@@ -25,7 +25,7 @@ app.get('/notes', (req, res) =>
 app.get('/api/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/db.json'))
 );
-// Post Route for 
+// Post Route for db.json
 app.post('/api/notes', (req, res) => {
     // Log that a POST request was received
     console.info(`${req.method} request received to add a new note`);
