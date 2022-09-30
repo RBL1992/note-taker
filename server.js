@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 const uuid = require('./helpers/uuid');
+const fsUtils = require('./helpers/fsUtils');
 
 const PORT = process.env.PORT || 3001;
 
@@ -39,18 +40,8 @@ app.post('/api/notes', (req, res) => {
             note_id: uuid(),
         };
 
-        // Convert the data to a string so we can save it
-        const noteString = JSON.stringify(newNote);
-
-        // Write the string to a file
-        fs.writeFile(`/db.json`, noteString, (err) =>
-            err
-                ? console.error(err)
-                : console.log(
-                    `${newNote} has been written to JSON file`
-                )
-        );
-
+        fsUtils.readAndAppend(newNote,'db.json')
+        
         const response = {
             status: 'success',
             body: newNote,
